@@ -1,0 +1,31 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: #f8f9fa; color: #333; line-height: 1.6; }
+.container { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar { width: 300px; background-color: #fff; border-right: 1px solid #ddd; padding: 20px; height: 100vh; position: fixed; overflow-y: auto; }
+.sidebar h2 { color: #2c3e50; margin-bottom: 20px; font-size: 1.5rem; border-bottom: 2px solid #3498db; padding-bottom: 10px;}
+#searchInput { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
+#toc ul { list-style: none; }
+#toc li { margin-bottom: 10px; }
+#toc a { text-decoration: none; color: #555; font-size: 0.95rem; display: block; padding: 5px; border-radius: 4px;}
+#toc a:hover { color: #3498db; background-color: #f1f8ff; }
+
+/* Main Content */
+.content { margin-left: 300px; padding: 40px; width: calc(100% - 300px); background-color: #fff; }
+#markdown-content { max-width: 800px; margin: 0 auto; }
+#markdown-content h1 { color: #2c3e50; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;}
+#markdown-content h2 { color: #34495e; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+#markdown-content h3 { color: #e67e22; margin-top: 20px; margin-bottom: 10px;}
+#markdown-content p, #markdown-content li { margin-bottom: 10px; font-size: 1.05rem; }
+#markdown-content ul { margin-left: 20px; margin-bottom: 20px; }
+#markdown-content hr { margin: 30px 0; border: 0; border-top: 1px solid #eee; }
+
+/* App jaisa Mobile View */
+@media (max-width: 768px) {
+    .container { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #ddd; }
+    .content { margin-left: 0; width: 100%; padding: 15px; }
+    #toc { max-height: 200px; overflow-y: auto; border: 1px solid #eee; padding: 10px; border-radius: 5px; background: #fafafa;}
+    #markdown-content h1 { font-size: 1.8rem; }
+}
