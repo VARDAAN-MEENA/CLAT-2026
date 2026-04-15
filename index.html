@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAT 2026 - 200 Day Roadmap</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>CLAT 2026 Roadmap</h2>
+            <input type="text" id="searchInput" placeholder="Search days, topics...">
+            <div id="toc"></div>
+        </nav>
+
+        <main class="content">
+            <div id="markdown-content">Roadmap load ho raha hai...</div>
+        </main>
+    </div>
+
+    <script>
+        // Aapki file ka exact naam
+        const markdownFileName = 'CLAT_2026_200Day_Roadmap.md';
+
+        fetch(markdownFileName)
+            .then(response => {
+                if (!response.ok) throw new Error("File load nahi ho payi.");
+                return response.text();
+            })
+            .then(text => {
+                document.getElementById('markdown-content').innerHTML = marked.parse(text);
+                buildTOC();
+                setupSearch();
+            })
+            .catch(error => {
+                document.getElementById('markdown-content').innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+            });
+
+        function buildTOC() {
+            const content = document.getElementById('markdown-content');
+            const headings = content.querySelectorAll('h2');
+            const toc = document.getElementById('toc');
+            let tocHTML = '<ul>';
+
+            headings.forEach((heading, index) => {
+                if (!heading.id) heading.id = 'heading-' + index; 
+                tocHTML += `<li><a href="#${heading.id}">${heading.innerText}</a></li>`;
+            });
+            tocHTML += '</ul>';
+            toc.innerHTML = tocHTML;
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const tocLinks = document.querySelectorAll('#toc li');
+                tocLinks.forEach(link => {
+                    link.style.display = link.innerText.toLowerCase().includes(term) ? '' : 'none';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
